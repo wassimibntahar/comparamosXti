@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeCompare</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #ffffff;
+            z-index: 1000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between; /* clave */
+            width: 100%;
+            box-shadow: 0 8px 20px  rgba(71, 71, 71, 0.05);
+        }
+
+        .busqueda {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            padding: 0 200px;
+        }
+
+        .busqueda input {
+            width: 100%;
+            max-width: 700px; /* o el tamaño que quieras */
+            font-size: 18px;
+            padding: 8px 45px 8px 15px; /* espacio a la derecha para la lupa */
+            border-radius: 15px;
+        }
+
+        .lupa-icon {
+            position: absolute;
+            right: 220px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.2s ease;
+        }
+
+        .busqueda input:focus {
+            border-color: gray;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 220px; /* espacio para que no se oculte tras el header */
+        }
+
+        .main-content h1 {
+            font-size: 130px;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 30px;
+        }
+
+        .main-content h2 {
+            font-size: 20px;
+            font-weight: 50;
+            margin-top: 20px;
+        }
+
+        .filtro {
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 22px;
+            cursor: pointer;  
+            color: rgb(0, 118, 244)
+
+        }
+
+        nav a {
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 21px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 30px;
+            color: #333;
+        }
+        
+
+        .imagenes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 70px;
+        }
+        
+        .filtro-popup {
+            position: absolute;
+            top: 69%;
+            left: 63%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .categoria {
+            padding: 12px;
+            margin: 5px 0;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .categoria:hover {
+            background-color: #e0f0ff;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="logo">WeCompare</div>
+
+        <form class="busqueda">
+            <input type="text" placeholder="Buscar artículo...">
+            <img src="lupa.jpg" alt="Buscar" class="lupa-icon">
+        </form>
+
+        <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1>WeCompare</h1>
+        <p>Descubre el precio del artículo que buscas al instante</p>
+        <h2>¿No tienes en mente un artículo en concreto?   
+            <span class="filtro" id="mostrarFiltros">Búscalo por filtros</span> 
+        </h2>
+    </main>
+
+
+    <div class="filtro-popup" id="filtroCategorias" style="display: none;">
+        <p class="categoria">Smartphones</p>
+        <p class="categoria">Cámaras</p>
+        <p class="categoria">Drones</p>
+        <p class="categoria">Consolas</p>
+    </div>
+
+
+
+    <div class="imagenes">
+        <img src="iPhones_logo.jpg" alt="iPhone">
+    </div>
+
+    <script>
+        const mostrarFiltros = document.getElementById('mostrarFiltros');
+        const filtroCategorias = document.getElementById('filtroCategorias');
+
+        mostrarFiltros.addEventListener('click', () => {
+            filtroCategorias.style.display = filtroCategorias.style.display === 'none' ? 'grid' : 'none';
+        });
+    </script>
+
+
+  <script src="app.js"></script>
+</body>
