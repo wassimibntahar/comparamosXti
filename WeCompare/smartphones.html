@@ -154,6 +154,75 @@
             padding-bottom: 5px;
         }
 
+        .btn-buscar {
+            padding: 12px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            background-color: #006adb;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            margin-bottom: 44px;
+        }
+
+        .btn-buscar:hover {
+            background-color: #0056cc;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4); /* sombra fondo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .popup {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 1200px;  /* Agrandado */
+            height: 600px; /* Asegura que no ocupe toda la pantalla */
+            width: 80%;         /* Asegura que se adapta a pantallas pequeñas */
+            text-align: center;
+            font-size: 22px;  
+            margin-top: 80px;
+        }
+
+        .selector-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .selector-opcion {
+            padding: 10px 20px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        .selector-opcion:hover {
+            background-color: #e1f0ff;
+        }
+
+        .selector-opcion.selected {
+            background-color: #cce3ff;
+            font-weight: bold;
+        }
 
     </style>
 
@@ -179,38 +248,49 @@
         <h2 id="iphoneTitulo" class="clickable">iPhone</h2>
         <div id="iphoneFiltros" class="filtros" style="display: none;">
             <h6>Modelo:</h6>
-            <ul>
-                <li>iPhone 15</li>
-                <li>iPhone 15 Pro</li>
-                <li>iPhone 15 Pro Max</li>
-                <li>iPhone 15 Plus</li>
-                <li>iPhone 14</li>
-                <li>iPhone 14 Pro</li>
-                <li>iPhone 14 Pro Max</li>
-                <li>iPhone 14 Plus</li>
-                <li>iPhone 13</li>
-                <li>iPhone 13 Pro</li>
-                <li>iPhone 13 Pro Max</li>
-                <li>iPhone 12</li>
-                <li>iPhone 12 Pro</li>
-                <li>iPhone 12 Pro Max</li>
-                <li>iPhone 11</li>
-                <li>iPhone 11 Pro</li>
-                <li>iPhone 11 Pro Max</li>
-            </ul>
+            <div class="selector-group" id="modeloOpciones">
+            <div class="selector-opcion" data-value="iPhone 15">iPhone 15</div>
+            <div class="selector-opcion" data-value="iPhone 15 Pro">iPhone 15 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 15 Pro Max">iPhone 15 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 14">iPhone 14</div>
+            <div class="selector-opcion" data-value="iPhone 14 Pro">iPhone 14 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 14 Pro Max"> iPhone 14 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 13">iPhone 13</div>
+            <div class="selector-opcion" data-value="iPhone 13 Pro"> iPhone 13 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 13 Pro Max"> iPhone 13 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 12"> iPhone 12</div>
+            <div class="selector-opcion" data-value="iPhone 12 Pro"> iPhone 12 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 12 Pro Max"> iPhone 12 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 11"> iPhone 11</div>
+            <div class="selector-opcion" data-value="iPhone 11 Pro"> iPhone 11 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 11 Pro Max"> iPhone 11 Pro Max</div>
+        </div>
+
             <h6>Almacenamiento:</h6>
-            <ul>
-                <li>64 GB</li>
-                <li>128 GB</li>
-                <li>256 GB</li>
-                <li>512 GB</li>
-            </ul>
+            <div class="selector-group" id="almacenamientoOpciones">
+            <div class="selector-opcion" data-value="64 GB">64 GB</div>
+            <div class="selector-opcion" data-value="128 GB">128 GB</div>
+            <div class="selector-opcion" data-value="256 GB">256 GB</div>
+            <div class="selector-opcion" data-value="512 GB">512 GB</div>
+            </div>
+
+            <button id="buscarIphone" class="btn-buscar">Buscar</button>
+
         </div>
         <h3>Samsung</h3>
         <h4>Xiaomi</h4>
         <h5>Pixel</h5>
         </h2>
     </main>
+
+    <div id="overlay" style="display:none;">
+        <div class="popup">
+            <img id="popupImagen" src="iphone15.jpg" alt="Imagen del producto" style="max-width: 300px; margin-bottom: 20px;">
+            <p id="popupContenido">Aquí aparecerá el contenido...</p>
+        </div>
+    </div>
+
+
 
     <script>
     const iphoneTitulo = document.getElementById('iphoneTitulo');
@@ -220,8 +300,61 @@
         const isVisible = iphoneFiltros.style.display === 'block';
         iphoneFiltros.style.display = isVisible ? 'none' : 'block';
     });
+
+    const btnBuscar = document.getElementById('buscarIphone');
+    const overlay = document.getElementById('overlay');
+    const popupContenido = document.getElementById('popupContenido');
+
+    btnBuscar.addEventListener('click', () => {
+        const modelo = document.querySelector('input[name="modelo"]:checked');
+        const almacenamiento = document.querySelector('input[name="almacenamiento"]:checked');
+
+        if (!modelo || !almacenamiento) {
+            alert("Selecciona un modelo y almacenamiento");
+            return;
+        }
+
+        // Aquí puedes personalizar lo que aparece en el popup
+        popupContenido.innerText = `Has seleccionado:\nModelo: ${modelo.value}\nAlmacenamiento: ${almacenamiento.value}`;
+        overlay.style.display = 'flex';
+    });
+
+    function setupSeleccionador(grupoId) {
+    const grupo = document.getElementById(grupoId);
+    let seleccionActual = null;
+
+    grupo.querySelectorAll('.selector-opcion').forEach(opcion => {
+        opcion.addEventListener('click', () => {
+        if (seleccionActual) {
+            seleccionActual.classList.remove('selected');
+        }
+        opcion.classList.add('selected');
+        seleccionActual = opcion;
+        });
+    });
+    }
+
+    // Activar selección para modelo y almacenamiento
+    setupSeleccionador('modeloOpciones');
+    setupSeleccionador('almacenamientoOpciones');
+
+    // Botón buscar: recoger los valores
+    btnBuscar.addEventListener('click', () => {
+    const modelo = document.querySelector('#modeloOpciones .selected');
+    const almacenamiento = document.querySelector('#almacenamientoOpciones .selected');
+
+    if (!modelo || !almacenamiento) {
+        alert("Selecciona un modelo y almacenamiento");
+        return;
+    }
+
+    popupContenido.innerText = `\nModelo: ${modelo.dataset.value}\nAlmacenamiento: ${almacenamiento.dataset.value}`;
+    overlay.style.display = 'flex';
+    });
+
     </script>
 
 
   <script src="app.js"></script>
 </body>
+
