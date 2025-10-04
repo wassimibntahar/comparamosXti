@@ -1,0 +1,52 @@
+{
+  "productos": [
+    // Samsung
+    { "id": 1, "categoria": "moviles", "marca": "Samsung", "modelo": "S22", "almacenamiento": "128 GB", "precio": 220 },
+    { "id": 2, "categoria": "moviles", "marca": "Samsung", "modelo": "S22", "almacenamiento": "256 GB", "precio": 240 },
+    { "id": 3, "categoria": "moviles", "marca": "Samsung", "modelo": "S22 Ultra", "almacenamiento": "128 GB", "precio": 300 },
+    { "id": 4, "categoria": "moviles", "marca": "Samsung", "modelo": "S22 Ultra", "almacenamiento": "256 GB", "precio": 325 },
+    { "id": 5, "categoria": "moviles", "marca": "Samsung", "modelo": "S23", "almacenamiento": "128 GB", "precio": 310 },
+    { "id": 6, "categoria": "moviles", "marca": "Samsung", "modelo": "S23", "almacenamiento": "256 GB", "precio": 335 },
+    { "id": 7, "categoria": "moviles", "marca": "Samsung", "modelo": "S23 Ultra", "almacenamiento": "128 GB", "precio": 430 },
+    { "id": 8, "categoria": "moviles", "marca": "Samsung", "modelo": "S23 Ultra", "almacenamiento": "256 GB", "precio": 455 },
+    { "id": 9, "categoria": "moviles", "marca": "Samsung", "modelo": "S24", "almacenamiento": "128 GB", "precio": 350 },
+    { "id": 10, "categoria": "moviles", "marca": "Samsung", "modelo": "S24", "almacenamiento": "256 GB", "precio": 380 },
+    { "id": 11, "categoria": "moviles", "marca": "Samsung", "modelo": "S24", "almacenamiento": "512 GB", "precio": 410 },
+    { "id": 12, "categoria": "moviles", "marca": "Samsung", "modelo": "S24 Ultra", "almacenamiento": "256 GB", "precio": 610 },
+    { "id": 13, "categoria": "moviles", "marca": "Samsung", "modelo": "S24 Ultra", "almacenamiento": "512 GB", "precio": 640 },
+
+    // iPhone 15
+    { "id": 14, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15", "almacenamiento": "128 GB", "precio": 535 },
+    { "id": 15, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15", "almacenamiento": "256 GB", "precio": 585 },
+    { "id": 16, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15", "almacenamiento": "512 GB", "precio": 625 },
+    { "id": 17, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Plus", "almacenamiento": "128 GB", "precio": 550 },
+    { "id": 18, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Plus", "almacenamiento": "256 GB", "precio": 600 },
+    { "id": 19, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Plus", "almacenamiento": "512 GB", "precio": 635 },
+    { "id": 20, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro", "almacenamiento": "128 GB", "precio": 620 },
+    { "id": 21, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro", "almacenamiento": "256 GB", "precio": 650 },
+    { "id": 22, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro", "almacenamiento": "512 GB", "precio": 680 },
+    { "id": 23, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro Max", "almacenamiento": "128 GB", "precio": 670 },
+    { "id": 24, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro Max", "almacenamiento": "256 GB", "precio": 700 },
+    { "id": 25, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 15 Pro Max", "almacenamiento": "512 GB", "precio": 750 },
+
+    // iPhone 14
+    { "id": 26, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14", "almacenamiento": "128 GB", "precio": 330 },
+    { "id": 27, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14", "almacenamiento": "256 GB", "precio": 360 },
+    { "id": 28, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14", "almacenamiento": "512 GB", "precio": 380 },
+    { "id": 29, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Plus", "almacenamiento": "128 GB", "precio": 350 },
+    { "id": 30, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Plus", "almacenamiento": "256 GB", "precio": 390 },
+    { "id": 31, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Plus", "almacenamiento": "512 GB", "precio": 430 },
+    { "id": 32, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro", "almacenamiento": "128 GB", "precio": 500 },
+    { "id": 33, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro", "almacenamiento": "256 GB", "precio": 530 },
+    { "id": 34, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro", "almacenamiento": "512 GB", "precio": 560 },
+    { "id": 35, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro Max", "almacenamiento": "128 GB", "precio": 530 },
+    { "id": 36, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro Max", "almacenamiento": "256 GB", "precio": 560 },
+    { "id": 37, "categoria": "moviles", "marca": "Apple", "modelo": "iPhone 14 Pro Max", "almacenamiento": "512 GB", "precio": 590 },
+
+    // PlayStation
+    { "id": 38, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5", "almacenamiento": "500 GB", "precio": 250 },
+    { "id": 39, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5", "almacenamiento": "850 GB", "precio": 280 },
+    { "id": 40, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5 Slim", "almacenamiento": "500 GB", "precio": 310 },
+    { "id": 41, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5 Slim", "almacenamiento": "850 GB", "precio": 340 }
+  ]
+}

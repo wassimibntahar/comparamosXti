@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comparamosXti</title>
+    <link rel="stylesheet" href="style/moviles.css">
+
+</head>
+<body>
+    <header>
+        <div class="logo">comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</div>
+
+        <form class="busqueda">
+            <input type="text" placeholder="Buscar artículo...">
+            <img src="img/lupa.png" alt="Buscar" class="lupa-icon">
+        </form>
+
+        <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1>Móviles</h1>
+        <h2 id="iphoneTitulo" class="clickable">iPhone</h2>
+        <div id="iphoneFiltros" class="filtros" style="display: none;">
+            <h6>Modelo:</h6>
+            <div class="selector-group" id="modeloOpcionesIphone">
+            <div class="selector-opcion" data-value="iPhone 15">iPhone 15</div>
+            <div class="selector-opcion" data-value="iPhone 15 Pro">iPhone 15 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 15 Pro Max">iPhone 15 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 14">iPhone 14</div>
+            <div class="selector-opcion" data-value="iPhone 14 Pro">iPhone 14 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 14 Pro Max"> iPhone 14 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 13">iPhone 13</div>
+            <div class="selector-opcion" data-value="iPhone 13 Pro"> iPhone 13 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 13 Pro Max"> iPhone 13 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 12"> iPhone 12</div>
+            <div class="selector-opcion" data-value="iPhone 12 Pro"> iPhone 12 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 12 Pro Max"> iPhone 12 Pro Max</div>
+            <div class="selector-opcion" data-value="iPhone 11"> iPhone 11</div>
+            <div class="selector-opcion" data-value="iPhone 11 Pro"> iPhone 11 Pro</div>
+            <div class="selector-opcion" data-value="iPhone 11 Pro Max"> iPhone 11 Pro Max</div>
+        </div>
+
+            <h6>Almacenamiento:</h6>
+            <div class="selector-group" id="almacenamientoOpcionesIphone">
+            <div class="selector-opcion" data-value="64 GB">64 GB</div>
+            <div class="selector-opcion" data-value="128 GB">128 GB</div>
+            <div class="selector-opcion" data-value="256 GB">256 GB</div>
+            <div class="selector-opcion" data-value="512 GB">512 GB</div>
+            </div>
+
+            <button id="buscarIphone" class="btn-buscar">Buscar</button>
+
+        </div>
+        <h3 id="samsungTitulo" class="clickable">Samsung</h3>
+        <div id="samsungFiltros" class="filtros" style="display: none;">
+            <h6>Modelo:</h6>
+            <div class="selector-group" id="modeloOpcionesSamsung">
+            <div class="selector-opcion" data-value="S22">S22</div>
+            <div class="selector-opcion" data-value="S22 Ultra">S22 Ultra</div>
+            <div class="selector-opcion" data-value="S23">S23</div>
+            <div class="selector-opcion" data-value="S23 Ultra">S23 Ultra</div>
+            <div class="selector-opcion" data-value="S24">S24</div>
+            <div class="selector-opcion" data-value="S24 Ultra">S24 Ultra</div>
+        </div>
+
+            <h6>Almacenamiento:</h6>
+            <div class="selector-group" id="almacenamientoOpcionesSamsung">
+            <div class="selector-opcion" data-value="64 GB">64 GB</div>
+            <div class="selector-opcion" data-value="128 GB">128 GB</div>
+            <div class="selector-opcion" data-value="256 GB">256 GB</div>
+            <div class="selector-opcion" data-value="512 GB">512 GB</div>
+            </div>
+
+            <button id="buscarSamsung" class="btn-buscar">Buscar</button>
+
+        </div>
+        <h4>Xiaomi</h4>
+        <h5>Pixel</h5>
+        </h2>
+    </main>
+
+    <div id="overlay" style="display:none;">
+        <div class="popup">
+            <button id="cerrarPopup" class="cerrar-popup">✖</button>
+            <img id="popupImagen" alt="Imagen del producto" style="max-width: 300px; margin-bottom: 20px;">
+            <p id="popupContenido">Aquí aparecerá el contenido...</p>
+            <p id="popupPrecio" style="padding: 3px; font-weight: bold; font-size: 40px; color: black;">
+        </div>
+    </div>
+
+    <div class="tralalero" style="padding-left: 20%">
+        <img src="img/tralalero.png" alt="tralalero">
+    </div>
+
+    <script src="js/moviles.js"></script>
+    <script src="app.js"></script>
+
+</body>

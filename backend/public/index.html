@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>comparamosXti</title>
+<link rel="stylesheet" href="style/index.css">
+
+</head>
+<body>
+<header>
+    <div class="logo">comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</div>
+
+    <form class="busqueda">
+        <input type="text" placeholder="Buscar artículo...">
+        <img src="img/lupa.png" alt="Buscar" class="lupa-icon">
+    </form>
+
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Contacto</a>
+    </nav>
+</header>
+
+<main class="main-content">
+    <h1>comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</h1>
+    <p>Descubre el precio del artículo que buscas al instante</p>
+    <h2>¿No tienes en mente un artículo en concreto?   
+        <span class="filtro" id="mostrarFiltros">Búscalo por filtros</span> 
+    </h2>
+</main>
+
+<div class="filtro-popup" id="filtroCategorias" style="display: none;">
+    <p class="categoria" onclick="location.href='moviles.html'">Móviles</p>
+    <p class="categoria">Cámaras</p>
+    <p class="categoria">Drones</p>
+    <p class="categoria" onclick="location.href='consolas.html'">Consolas</p>
+</div>
+
+<div class="imagenes">
+    <img src="img/iPhones_logo.png" alt="iPhone">
+</div>
+
+<script src="js/index.js"></script>
+
+</body>
+</html>

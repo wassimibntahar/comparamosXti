@@ -1,0 +1,174 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    header {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0%;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1000;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        box-shadow: 0 0.5rem 1.25rem rgba(71,71,71,0.05);
+        gap: 2rem;
+    }
+
+    .logo {
+        font-weight: bold;
+        font-size: 1.875rem;
+        color: #333;
+    }
+
+    .busqueda {
+        position: relative;
+        flex: 1;
+        margin: 0 2.5%;
+        max-width: 900px;
+    }
+
+    .busqueda input {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5rem 0rem 0.5rem 1rem;
+        border-radius: 1rem;
+    }
+
+    .lupa-icon {
+        position: absolute;
+        right: 0rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.25rem;
+        height: 1.25rem;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: 0.2s ease;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 1.25rem;
+        margin-left: 1.4rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+        header { padding: 1rem 2rem; }
+        nav a { font-size: 1.1rem; margin-left: 0.75rem; }
+    }
+
+    @media (max-width: 768px) {
+        header { flex-direction: column; padding: 0.75rem 1.5rem; }
+        .busqueda { margin: 0.75rem 0; }
+        nav a { font-size: 1rem; margin: 0.25rem; }
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: 7rem;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .main-content h1 {
+        font-size: 8vw; /* escala con pantalla */
+        margin-bottom: 1rem;
+    }
+
+    .main-content p {
+        font-size: 2vw;
+        margin-bottom: 1rem;
+    }
+
+    .main-content h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-top: 1rem;
+    }
+
+    .filtro {
+        margin-left: 0.5rem;
+        font-weight: bold;
+        font-size: 1.375rem;
+        cursor: pointer;
+        color: rgb(0, 118, 244);
+    }
+
+    .imagenes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+    }
+
+    .imagenes img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .filtro-popup {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        position: absolute;
+        top: 63%;
+        left: 65%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 600px;
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.1);
+        text-align: center;
+        z-index: 10;
+    }
+
+    .categoria {
+        padding: 0.75rem;
+        margin: 0.25rem;
+        background-color: #f8f8f8;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+
+    .categoria:hover {
+        background-color: #e0f0ff;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 1024px) {
+        .main-content h1 { font-size: 10vw; }
+        .main-content p { font-size: 3vw; }
+        .filtro-popup { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+        header { flex-direction: column; padding: 1rem 2rem; }
+        nav a { font-size: 1rem; margin: 0.25rem; }
+        .busqueda { margin: 1rem 0; }
+        .main-content h1 { font-size: 12vw; }
+        .main-content p { font-size: 4vw; }
+        .filtro-popup { grid-template-columns: 1fr; width: 90%; }
+    }
+
+</style>
