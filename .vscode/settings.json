@@ -1,0 +1,10 @@
+{
+  "files.watcherExclude": {
+    "**/img/**": true,
+    "**/node_modules/**": true
+  },
+  "search.exclude": {
+    "**/img/**": true,
+    "**/node_modules/**": true
+  }
+}
