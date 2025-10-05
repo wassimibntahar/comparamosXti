@@ -21,7 +21,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        box-shadow: 0 0.5rem 1.25rem rgba(71,71,71,0.05);
+        box-shadow: 0 1.5rem 1.25rem rgba(71,71,71,0.05);
         gap: 2rem;
     }
 
@@ -265,4 +265,34 @@
             font-size: 24px;
         }
     }
+
+    @keyframes aparecerIzq {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5
+        {
+            opacity: 0; /* evita que se vea antes de animar */
+            animation: aparecerIzq 0.1s ease-out forwards;
+
+        }
+
+        main h1 { animation-delay: 0.05s; }
+        main h2 { animation-delay: 0.1s; }
+        main h3 { animation-delay: 0.15s; }
+        main h4 { animation-delay: 0.2s; }
+        main h5 { animation-delay: 0.25s }
+
+  
 </style>

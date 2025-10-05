@@ -1,183 +1,118 @@
-    //COMUNES
-    // Función para desplegar filtros al pulsar título
-    function toggleFiltros(tituloId, filtrosId) {
-        const titulo = document.getElementById(tituloId);
-        const filtros = document.getElementById(filtrosId);
+let precios = {}; // objeto plano para popup
 
-        titulo.addEventListener('click', () => {
-            const isVisible = filtros.style.display === 'block';
-            filtros.style.display = isVisible ? 'none' : 'block';
+// Toggle filtros
+function toggleFiltros(tituloId, filtrosId) {
+    const titulo = document.getElementById(tituloId);
+    const filtros = document.getElementById(filtrosId);
+
+    titulo.addEventListener('click', () => {
+        filtros.style.display = filtros.style.display === 'block' ? 'none' : 'block';
+    });
+}
+
+// Activar selección de opciones en un grupo
+function setupSeleccionador(grupoId) {
+    const grupo = document.getElementById(grupoId);
+    let seleccionActual = null;
+    grupo.querySelectorAll('.selector-opcion').forEach(opcion => {
+        opcion.addEventListener('click', () => {
+            if (seleccionActual) seleccionActual.classList.remove('selected');
+            opcion.classList.add('selected');
+            seleccionActual = opcion;
         });
-    }
+    });
+}
 
-    // Función para activar selección de opciones
-    function setupSeleccionador(grupoId) {
-        const grupo = document.getElementById(grupoId);
-        let seleccionActual = null;
+// Mostrar popup
+function mostrarPopup(modelo, almacenamiento, precios) {
+    const overlay = document.getElementById('overlay');
+    const popupContenido = document.getElementById('popupContenido');
 
-        grupo.querySelectorAll('.selector-opcion').forEach(opcion => {
-            opcion.addEventListener('click', () => {
-                if (seleccionActual) {
-                    seleccionActual.classList.remove('selected');
-                }
-                opcion.classList.add('selected');
-                seleccionActual = opcion;
-            });
+    const clave = `${modelo.dataset.value}-${almacenamiento.dataset.value.trim()}`;
+    const precio = precios[clave] ? precios[clave] + " €" : "Precio no disponible";
+
+    popupContenido.innerText = `Modelo: ${modelo.dataset.value.trim()}\nAlmacenamiento: ${almacenamiento.dataset.value.trim()}`;
+    document.getElementById("popupPrecio").innerText = `Precio: ${precio}`;
+
+    const nombreArchivo = "img/" + modelo.dataset.value.toLowerCase().replace(/\s+/g, '') + ".png";
+    document.getElementById("popupImagen").src = nombreArchivo;
+
+    overlay.style.display = 'flex';
+}
+
+// Cerrar popup
+document.getElementById("cerrarPopup").addEventListener("click", () => {
+    document.getElementById("overlay").style.display = "none";
+});
+
+// Inicializar selección de todos los grupos que ya existen en HTML
+const grupos = [
+    "modeloOpcionesIphone", "almacenamientoOpcionesIphone",
+    "modeloOpcionesSamsung", "almacenamientoOpcionesSamsung"
+];
+grupos.forEach(setupSeleccionador);
+
+// Botones buscar
+document.getElementById("buscarIphone").addEventListener("click", (e) => {
+    e.preventDefault(); // evita recarga
+    const modelo = document.querySelector("#modeloOpcionesIphone .selected");
+    const almacenamiento = document.querySelector("#almacenamientoOpcionesIphone .selected");
+    if (!modelo || !almacenamiento) return alert("Selecciona un modelo y almacenamiento de iPhone");
+    mostrarPopup(modelo, almacenamiento, precios);
+});
+
+
+document.getElementById("buscarSamsung").addEventListener("click", () => {
+    const modelo = document.querySelector("#modeloOpcionesSamsung .selected");
+    const almacenamiento = document.querySelector("#almacenamientoOpcionesSamsung .selected");
+    if (!modelo || !almacenamiento) return alert("Selecciona un modelo y almacenamiento de Samsung");
+    mostrarPopup(modelo, almacenamiento, precios);
+});
+
+fetch('../db.json')
+    .then(res => res.json())
+    .then(data => {
+        const productos = data.productos.filter(p => p.categoria === "moviles");
+
+        productos.forEach(p => {
+            const clave = `${p.modelo.trim()}-${p.almacenamiento.trim()}`;
+            precios[clave] = p.precio;
+        });        
+
+        // Opcional: si quieres llenar los selectores dinámicamente
+        // por ejemplo para iPhone
+        const modelosIphone = [...new Set(productos.filter(p => p.marca==="Apple").map(p=>p.modelo))];
+        const almacenIphone = [...new Set(productos.filter(p => p.marca==="Apple" && p.modelo===modelosIphone[0]).map(p=>p.almacenamiento))];
+
+        const modeloContainer = document.getElementById("modeloOpcionesIphone");
+        const almacenContainer = document.getElementById("almacenamientoOpcionesIphone");
+
+        modeloContainer.innerHTML = "";
+        almacenContainer.innerHTML = "";
+
+        modelosIphone.forEach(m => {
+            const div = document.createElement('div');
+            div.className = "selector-opcion";
+            div.dataset.value = m;
+            div.innerText = m;
+            modeloContainer.appendChild(div);
         });
-    }
 
-    // Función para mostrar el popup
-    function mostrarPopup(modelo, almacenamiento, precios) {
-        const overlay = document.getElementById('overlay');
-        const popupContenido = document.getElementById('popupContenido');
+        almacenIphone.forEach(a => {
+            const div = document.createElement('div');
+            div.className = "selector-opcion";
+            div.dataset.value = a;
+            div.innerText = a;
+            almacenContainer.appendChild(div);
+        });
 
-        const clave = `${modelo.dataset.value}-${almacenamiento.dataset.value}`;
-        const precio = precios[clave] || "Precio no disponible";
-
-        popupContenido.innerText = `Modelo: ${modelo.dataset.value}\nAlmacenamiento: ${almacenamiento.dataset.value}`;
-        document.getElementById("popupPrecio").innerText = `Precio: ${precio}`;
-
-        // Imagen dinámica (ejemplo: iphone15.png o s23.png)
-        const nombreArchivo = "img/" + modelo.dataset.value.toLowerCase().replace(/\s+/g, '') + ".png";
-        document.getElementById("popupImagen").src = nombreArchivo;
-
-        overlay.style.display = 'flex';
-    }
-
-    /* ---------- IPHONE ---------- */
-
-    toggleFiltros("iphoneTitulo", "iphoneFiltros");
-    setupSeleccionador("modeloOpcionesIphone");
-    setupSeleccionador("almacenamientoOpcionesIphone");
-
-    const btnBuscarIphone = document.getElementById("buscarIphone");
-    btnBuscarIphone.addEventListener("click", () => {
-        const modelo = document.querySelector("#modeloOpcionesIphone .selected");
-        const almacenamiento = document.querySelector("#almacenamientoOpcionesIphone .selected");
-
-        if (!modelo || !almacenamiento) {
-            alert("Selecciona un modelo y almacenamiento de iPhone");
-            return;
-        }
-        mostrarPopup(modelo, almacenamiento, precios);
+        // Activar selección
+        setupSeleccionador("modeloOpcionesIphone");
+        setupSeleccionador("almacenamientoOpcionesIphone");
     });
 
 
-    toggleFiltros("samsungTitulo", "samsungFiltros");
-    setupSeleccionador("modeloOpcionesSamsung");
-    setupSeleccionador("almacenamientoOpcionesSamsung");
-
-    const btnBuscarSamsung = document.getElementById("buscarSamsung");
-    btnBuscarSamsung.addEventListener("click", () => {
-        const modelo = document.querySelector("#modeloOpcionesSamsung .selected");
-        const almacenamiento = document.querySelector("#almacenamientoOpcionesSamsung .selected");
-
-        if (!modelo || !almacenamiento) {
-            alert("Selecciona un modelo y almacenamiento de Samsung");
-            return;
-        }
-        mostrarPopup(modelo, almacenamiento, precios);
-    });
-
-
-    const cerrarPopup = document.getElementById("cerrarPopup");
-    cerrarPopup.addEventListener("click", () => {
-        document.getElementById("overlay").style.display = "none";
-    });
-
-    const precios = {
-        //Samsung
-        "S22-128 GB": "220 €",
-        "S22-256 GB": "240 €",
-
-        "S22 Ultra-128 GB": "300 €",
-        "S22 Ultra-256 GB": "325 €",
-
-        "S23-128 GB": "310 €",
-        "S23-256 GB": "335 €",
-
-        "S23 Ultra-128 GB": "430 €",
-        "S23 Ultra-256 GB": "455 €",
-
-        "S24-128 GB": "350 €",
-        "S24-256 GB": "380 €",
-        "S24-512 GB": "410 €",
-
-        "S24 Ultra-256 GB": "610 €",
-        "S24 Ultra-512 GB": "640 €",
- 
-        // iPhone 15
-        "iPhone 15-128 GB": "535 €",
-        "iPhone 15-256 GB": "585 €",
-        "iPhone 15-512 GB": "625 €",
-
-        "iPhone 15 Plus-128 GB": "550 €",
-        "iPhone 15 Plus-256 GB": "600 €",
-        "iPhone 15 Plus-512 GB": "635 €",
-
-        "iPhone 15 Pro-128 GB": "620 €",
-        "iPhone 15 Pro-256 GB": "650 €",
-        "iPhone 15 Pro-512 GB": "680 €",
-
-        "iPhone 15 Pro Max-128 GB": "670 €",
-        "iPhone 15 Pro Max-256 GB": "700 €",
-        "iPhone 15 Pro Max-512 GB": "750 €",
-
-        // iPhone 14
-        "iPhone 14-128 GB": "330 €",
-        "iPhone 14-256 GB": "360 €",
-        "iPhone 14-512 GB": "380 €",
-
-        "iPhone 14 Plus-128 GB": "350 €",
-        "iPhone 14 Plus-256 GB": "390 €",
-        "iPhone 14 Plus-512 GB": "430 €",
-
-        "iPhone 14 Pro-128 GB": "500 €",
-        "iPhone 14 Pro-256 GB": "530 €",
-        "iPhone 14 Pro-512 GB": "560 €",
-
-        "iPhone 14 Pro Max-128 GB": "530 €",
-        "iPhone 14 Pro Max-256 GB": "560 €",
-        "iPhone 14 Pro Max-512 GB": "590 €",
-
-        // iPhone 13
-        "iPhone 13-128 GB": "280 €",
-        "iPhone 13-256 GB": "320 €",
-        "iPhone 13-512 GB": "360 €",
-
-        "iPhone 13 Pro-128 GB": "370 €",
-        "iPhone 13 Pro-256 GB": "400 €",
-        "iPhone 13 Pro-512 GB": "430 €",
-
-        "iPhone 13 Pro Max-128 GB": "420 €",
-        "iPhone 13 Pro Max-256 GB": "450 €",
-        "iPhone 13 Pro Max-512 GB": "480 €",
-
-        // iPhone 12
-        "iPhone 12-64 GB": "200 €",
-        "iPhone 12-128 GB": "220 €",
-        "iPhone 12-256 GB": "245 €",
-
-        "iPhone 12 Pro-128 GB": "265 €",
-        "iPhone 12 Pro-256 GB": "280 €",
-        "iPhone 12 Pro-512 GB": "310 €",
-
-        "iPhone 12 Pro Max-128 GB": "280 €",
-        "iPhone 12 Pro Max-256 GB": "320 €",
-        "iPhone 12 Pro Max-512 GB": "350 €",
-
-        // iPhone 11
-        "iPhone 11-64 GB": "150 €",
-        "iPhone 11-128 GB": "160 €",
-        "iPhone 11-256 GB": "175 €",
-
-        "iPhone 11 Pro-64 GB": "160 €",
-        "iPhone 11 Pro-128 GB": "170 €",
-        "iPhone 11 Pro-256 GB": "190 €",
-        "iPhone 11 Pro-512 GB": "220 €",
-
-        "iPhone 11 Pro Max-64 GB": "170 €",
-        "iPhone 11 Pro Max-128 GB": "190 €",
-        "iPhone 11 Pro Max-256 GB": "220 €",
-        "iPhone 11 Pro Max-512 GB": "240 €"
-    };
+// Toggle filtros
+toggleFiltros("iphoneTitulo", "iphoneFiltros");
+toggleFiltros("samsungTitulo", "samsungFiltros");
+toggleFiltros("xiaomiTitulo", "xiaomiFiltros");

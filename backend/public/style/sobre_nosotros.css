@@ -21,7 +21,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        box-shadow: 0 0.5rem 1.25rem rgba(71,71,71,0.05);
+        box-shadow: 0 1.5rem 1.25rem rgba(71,71,71,0.05);
         gap: 2rem;
     }
 
@@ -134,7 +134,13 @@
             font-size: 1.2rem;
             margin-top: 0.3rem;
             color: #000000;
+            display: inline-block; /* necesario para animar bien */
         }
+
+        .pregunta-logo {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }   
 
         @media (max-width: 768px) {
             .member {
@@ -146,5 +152,33 @@
                 width: 120px;
             }
         }
+
+        @keyframes aparecerIzq {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        main * {
+            opacity: 0; /* evita que se vea antes de animar */
+            animation: aparecerIzq 0.2s ease-out forwards;
+
+        }
+
+        main *:nth-child(1) { animation-delay: 0.05s; }
+        main *:nth-child(2) { animation-delay: 0.1s; }
+        main *:nth-child(3) { animation-delay: 0.15s; }
+        main *:nth-child(4) { animation-delay: 0.2s; }
+        main *:nth-child(5) { animation-delay: 0.25s; }
+        main *:nth-child(6) { animation-delay: 0.3s; }
+        main *:nth-child(7) { animation-delay: 0.35s; }
+        main *:nth-child(8) { animation-delay: 0.4s; }
+        main *:nth-child(9) { animation-delay: 0.45s; }
+        main *:nth-child(10) { animation-delay: 0.5s; }
     
     </style>

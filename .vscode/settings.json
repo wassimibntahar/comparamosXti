@@ -1,10 +1,28 @@
 {
   "files.watcherExclude": {
-    "**/img/**": true,
-    "**/node_modules/**": true
+    "**/node_etc/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
+  },
+  "files.exclude": {
+    "**/node_etc": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true
   },
   "search.exclude": {
-    "**/img/**": true,
-    "**/node_modules/**": true
-  }
+    "**/node_etc": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/backend/public/assets/**": true,
+    "**/backend/public/img/**": true
+  },
+  "typescript.tsserver.exclude": [
+    "node_etc",
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

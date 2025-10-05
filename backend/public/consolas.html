@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"></html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,38 +18,40 @@
 
         <nav>
         <a href="index.html">Inicio</a>
-        <a href="#">Sobre nosotros</a>
+        <a href="sobre_nosotros.html">Sobre Nosotros</a>
         <a href="#">Contacto</a>
         </nav>
     </header>
 
     <main class="main-content">
         <h1>Consolas</h1>
-        <h2 id="playstationTitulo" class="clickable">PlayStation</h2>
-        <div id="playstationFiltros" class="filtros" style="display: none;">
+        <h2 id="SonyTitulo" class="clickable">PlayStation</h2>
+        <div id="SonyFiltros" class="filtros" style="display: none;">
             <h6>Modelo:</h6>
-            <div class="selector-group" id="modeloOpcionesPlaystation">
-            <div class="selector-opcion" data-value="PlayStation 5">PlayStation 5</div>
-            <div class="selector-opcion" data-value="PlayStation 5 Slim">PlayStation 5 Slim</div>
+            <div class="selector-group" id="modeloOpcionesSony">
+            <div class="selector-opcion" data-value="PlayStation (Sin Lector)">PlayStation 5 (Sin Lector)</div>
+            <div class="selector-opcion" data-value="PlayStation 5 Slim (Sin Lector)">PlayStation 5 Slim (Sin Lector)</div>
+            <div class="selector-opcion" data-value="PlayStation 5 Slim (Con Lector)">PlayStation 5 Slim (Con Lector)</div>
 
         </div>
 
             <h6>Almacenamiento:</h6>
-            <div class="selector-group" id="almacenamientoOpcionesPlaystation">
+            <div class="selector-group" id="almacenamientoOpcionesSony">
             <div class="selector-opcion" data-value="500 GB">500 GB</div>
             <div class="selector-opcion" data-value="850 GB">850 GB</div>
 
             </div>
 
-            <button id="buscarPlaystation" class="btn-buscar">Buscar</button>
+            <button id="buscarSony" class="btn-buscar">Buscar</button>
 
         </div>
         <h3 id="nintendoTitulo" class="clickable">Nintendo</h3>
         <div id="nintendoFiltros" class="filtros" style="display: none;">
             <h6>Modelo:</h6>
             <div class="selector-group" id="modeloOpcionesNintendo">
-            <div class="selector-opcion" data-value="Switch 1">Switch 1</div>
-            <div class="selector-opcion" data-value="Switch 2">Switch 2</div>
+            <div class="selector-opcion" data-value="Nintendo Switch">Nintendo Switch</div>
+            <div class="selector-opcion" data-value="Nintendo Switch Oled">Nintendo Switch Oled</div>
+            <div class="selector-opcion" data-value="Nintendo Switch 2">Nintendo Switch 2</div>
 
         </div>
 
@@ -58,7 +60,6 @@
             <div class="selector-opcion" data-value="64 GB">64 GB</div>
             <div class="selector-opcion" data-value="128 GB">128 GB</div>
             <div class="selector-opcion" data-value="256 GB">256 GB</div>
-            <div class="selector-opcion" data-value="512 GB">512 GB</div>
             </div>
 
             <button id="buscarNintendo" class="btn-buscar">Buscar</button>
@@ -66,7 +67,6 @@
         </div>
         <h4>Xbox</h4>
         <h5>Cracolandia</h5>
-        </h2>
     </main>
 
     <div id="overlay" style="display:none;">
@@ -84,3 +84,4 @@
 
   <script src="js/consolas.js"></script>
 </body>
+</html>
