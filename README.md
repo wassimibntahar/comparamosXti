@@ -1,7 +1,7 @@
 # 📱 **ComparamosXTi**
 
 ## ✨ **Sobre el proyecto**
-**ComparamosXTi** es una plataforma web diseñada para facilitar la vida tanto a compradores como vendedores de productos tecnológicos en el mercado de segunda mano: smartphones, consolas, tablets y más.
+**comparamosXti** es una plataforma web diseñada para facilitar la vida tanto a compradores como vendedores de productos tecnológicos en el mercado de segunda mano: smartphones, consolas, tablets y más.
 
 Como persona que se dedica día a día a la **compra-venta online**, recibo decenas de mensajes de potenciales clientes con las mismas dudas:
 
@@ -85,7 +85,7 @@ Este proyecto nació por una necesidad real:
 en la compra-venta, la mayoría de personas **no conocen el verdadero valor** de un dispositivo.  
 Muchos vendedores terminan perdiendo dinero, y muchos compradores pagan más de lo necesario… o incluso caen en estafas.
 
-**ComparamosXTi** convierte ese problema en:
+**comparamosXti** convierte ese problema en:
 
 - una herramienta útil,  
 - una experiencia más profesional,  
