@@ -111,6 +111,33 @@ fetch('../db.json')
         setupSeleccionador("almacenamientoOpcionesIphone");
     });
 
+    // Leer query param
+    const params = new URLSearchParams(window.location.search);
+    const modeloBuscado = params.get("modelo");
+
+    if (modeloBuscado) {
+        setTimeout(() => {
+            // Seleccionar modelo automáticamente
+            const modeloDiv = [...document.querySelectorAll("#modeloOpcionesIphone .selector-opcion, #modeloOpcionesSamsung .selector-opcion")]
+                            .find(el => el.dataset.value === modeloBuscado);
+
+            if (modeloDiv) {
+                modeloDiv.click();
+
+                // seleccionar almacenamiento base automáticamente
+                const almacenDiv = modeloDiv.parentElement.id.includes("Iphone") ?
+                    document.querySelector("#almacenamientoOpcionesIphone .selector-opcion") :
+                    document.querySelector("#almacenamientoOpcionesSamsung .selector-opcion");
+
+                if (almacenDiv) almacenDiv.click();
+
+                // abrir popup
+                mostrarPopup(modeloDiv, almacenDiv, precios);
+            }
+        }, 400);
+    }
+
+
 
 // Toggle filtros
 toggleFiltros("iphoneTitulo", "iphoneFiltros");
