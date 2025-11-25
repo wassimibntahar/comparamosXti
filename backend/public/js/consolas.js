@@ -44,27 +44,61 @@ function actualizarAlmacenamientos(marca, modelo) {
         almacenContainer.appendChild(div);
     });
 
-    // Activar selección de los nuevos elementos
+    // Activar selección de nuevos elementos
     setupSeleccionador(`almacenamientoOpciones${marca}`);
 }
 
 // Mostrar popup
-function mostrarPopup(modelo, almacenamiento) {
+function mostrarPopup(modelo, almacenamientoDefault) {
     const overlay = document.getElementById('overlay');
     const popupContenido = document.getElementById('popupContenido');
+    const popupPrecio = document.getElementById("popupPrecio");
+    const popupImg = document.getElementById("popupImagen");
+    const tabsContainer = document.getElementById("popupAlmacenamientos");
 
-    const clave = `${modelo.dataset.value}-${almacenamiento.dataset.value.trim()}`;
-    const precio = precios[clave] ? precios[clave] + " €" : "Precio no disponible";
+    const modeloValue = modelo.dataset.value.trim();
 
-    popupContenido.innerText = `Modelo: ${modelo.dataset.value.trim()}\nAlmacenamiento: ${almacenamiento.dataset.value.trim()}`;
-    document.getElementById("popupPrecio").innerText = `Precio: ${precio}`;
+    const almacenamientos = [...new Set(
+        productos
+            .filter(p => p.modelo === modeloValue)
+            .map(p => p.almacenamiento)
+    )];
 
-    const nombreArchivo = "img/" + modelo.dataset.value.toLowerCase().replace(/\s+/g, '') + ".png";
-    document.getElementById("popupImagen").src = nombreArchivo;
+    tabsContainer.innerHTML = "";
+    almacenamientos.forEach(a => {
+        const tab = document.createElement("div");
+        tab.className = "almacenamiento-tab";
+        tab.innerText = a;
+
+        if (a === almacenamientoDefault.dataset.value.trim()) {
+            tab.classList.add("active");
+        }
+
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".almacenamiento-tab")
+                .forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const clave = `${modeloValue}-${a}`;
+            popupPrecio.innerText = "Precio: " + (precios[clave] ? precios[clave] + " €" : "ND");
+        });
+
+        tabsContainer.appendChild(tab);
+    });
+
+    popupContenido.innerText = `Modelo: ${modeloValue}`;
+
+    const claveDefault =
+        `${modeloValue}-${almacenamientoDefault.dataset.value.trim()}`;
+
+    popupPrecio.innerText =
+        `Precio: ${precios[claveDefault] || "ND"} €`;
+
+    popupImg.src =
+        "img/" + modeloValue.toLowerCase().replace(/\s+/g, "") + ".png";
 
     overlay.style.display = 'flex';
 }
-
 // Cerrar popup
 document.getElementById("cerrarPopup").addEventListener("click", () => {
     document.getElementById("overlay").style.display = "none";
@@ -84,7 +118,7 @@ fetch('../db.json')
       precios[clave] = p.precio;
     });
 
-    const marcas = [...new Set(productos.map(p => p.marca))]; // ["Sony", "Nintendo", ...]
+    const marcas = [...new Set(productos.map(p => p.marca))]; // ["Sony", "Nintendo"]
 
     marcas.forEach(marca => {
       const modeloContainer = document.getElementById(`modeloOpciones${marca}`);
@@ -92,14 +126,11 @@ fetch('../db.json')
       const btn = document.getElementById(`buscar${marca}`);
       if (!modeloContainer || !almacenContainer || !btn) return;
 
-      // Modelos únicos por marca
       const modelos = [...new Set(productos.filter(p => p.marca === marca).map(p => p.modelo))];
 
-      // Limpiar contenedores
       modeloContainer.innerHTML = "";
       almacenContainer.innerHTML = "";
 
-      // Crear selectores de modelos
       modelos.forEach(m => {
         const div = document.createElement('div');
         div.className = "selector-opcion";
@@ -108,15 +139,12 @@ fetch('../db.json')
         modeloContainer.appendChild(div);
       });
 
-      // Activar selección de modelos con callback para actualizar almacenamientos
       setupSeleccionador(`modeloOpciones${marca}`, (opcion) => {
         actualizarAlmacenamientos(marca, opcion);
       });
 
-      // Inicializar almacenamientos con el primer modelo
       actualizarAlmacenamientos(marca, {dataset: {value: modelos[0]}});
 
-      // Botón buscar
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const modelo = document.querySelector(`#modeloOpciones${marca} .selected`);
@@ -125,39 +153,47 @@ fetch('../db.json')
         mostrarPopup(modelo, almacenamiento);
       });
 
-      // Activar selección de almacenamientos iniciales
       setupSeleccionador(`almacenamientoOpciones${marca}`);
     });
   });
 
-  // Leer query param
-  const params = new URLSearchParams(window.location.search);
-  const modeloBuscado = params.get("modelo");
 
-  if (modeloBuscado) {
-      setTimeout(() => {
-          // Seleccionar modelo automáticamente
-          const modeloDiv = [...document.querySelectorAll("#modeloOpcionesIphone .selector-opcion, #modeloOpcionesSamsung .selector-opcion")]
-                            .find(el => el.dataset.value === modeloBuscado);
+// ===============================
+// AUTO–SELECCIÓN DESDE EL BUSCADOR
+// ===============================
+const params = new URLSearchParams(window.location.search);
+const modeloBuscado = params.get("modelo");
 
-          if (modeloDiv) {
-              modeloDiv.click();
+if (modeloBuscado) {
+    setTimeout(() => {
 
-              // seleccionar almacenamiento base automáticamente
-              const almacenDiv = modeloDiv.parentElement.id.includes("Iphone") ?
-                  document.querySelector("#almacenamientoOpcionesIphone .selector-opcion") :
-                  document.querySelector("#almacenamientoOpcionesSamsung .selector-opcion");
+        // Buscar modelo en Sony + Nintendo
+        const modeloDiv = [...document.querySelectorAll(
+            "#modeloOpcionesSony .selector-opcion, \
+             #modeloOpcionesNintendo .selector-opcion"
+        )].find(el => el.dataset.value === modeloBuscado);
 
-              if (almacenDiv) almacenDiv.click();
+        if (modeloDiv) {
+            modeloDiv.click();
 
-              // abrir popup
-              mostrarPopup(modeloDiv, almacenDiv, precios);
-          }
-      }, 400);
-  }
+            // Identificar marca
+            const marca = modeloDiv.parentElement.id.replace("modeloOpciones", "");
+
+            // Seleccionar almacenamiento base
+            const almacenDiv = document.querySelector(`#almacenamientoOpciones${marca} .selector-opcion`);
+
+            if (almacenDiv) almacenDiv.click();
+
+            // Mostrar popup
+            mostrarPopup(modeloDiv, almacenDiv);
+        }
+    }, 400);
+}
 
 
 // Toggle filtros
 toggleFiltros("SonyTitulo", "SonyFiltros");
 toggleFiltros("nintendoTitulo", "nintendoFiltros");
+toggleFiltros("xboxTitulo", "xboxFiltros");
+
 
