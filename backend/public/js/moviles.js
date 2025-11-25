@@ -24,18 +24,57 @@ function setupSeleccionador(grupoId) {
 }
 
 // Mostrar popup
-function mostrarPopup(modelo, almacenamiento, precios) {
+function mostrarPopup(modelo, almacenamientoDefault, precios) {
     const overlay = document.getElementById('overlay');
     const popupContenido = document.getElementById('popupContenido');
+    const popupPrecio = document.getElementById("popupPrecio");
+    const popupImg = document.getElementById("popupImagen");
+    const tabsContainer = document.getElementById("popupAlmacenamientos");
 
-    const clave = `${modelo.dataset.value}-${almacenamiento.dataset.value.trim()}`;
-    const precio = precios[clave] ? precios[clave] + " €" : "Precio no disponible";
+    const modeloValue = modelo.dataset.value.trim();
 
-    popupContenido.innerText = `Modelo: ${modelo.dataset.value.trim()}\nAlmacenamiento: ${almacenamiento.dataset.value.trim()}`;
-    document.getElementById("popupPrecio").innerText = `Precio: ${precio}`;
+    // Obtener TODOS los almacenamientos disponibles para ese modelo
+    const almacenamientos = [...new Set(
+        Object.keys(precios)
+            .filter(k => k.startsWith(modeloValue))
+            .map(k => k.split("-")[1])
+    )];
 
-    const nombreArchivo = "img/" + modelo.dataset.value.toLowerCase().replace(/\s+/g, '') + ".png";
-    document.getElementById("popupImagen").src = nombreArchivo;
+    // Crear pestañas de almacenamiento
+    tabsContainer.innerHTML = "";
+    almacenamientos.forEach(a => {
+        const tab = document.createElement("div");
+        tab.className = "almacenamiento-tab";
+        tab.innerText = a;
+
+        if (a === almacenamientoDefault.dataset.value.trim()) {
+            tab.classList.add("active");
+        }
+
+        // Evento: cambiar almacenamiento
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".almacenamiento-tab")
+                .forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const clave = `${modeloValue}-${a}`;
+            popupPrecio.innerText = "Precio: " + (precios[clave] ? precios[clave] + " €" : "Selecciona almacenamiento válido");
+        });
+
+        tabsContainer.appendChild(tab);
+    });
+
+    popupContenido.innerText =
+        `Modelo: ${modeloValue}`;
+
+    const claveDefault =
+        `${modeloValue}-${almacenamientoDefault.dataset.value.trim()}`;
+
+    popupPrecio.innerText =
+        `Precio: ${precios[claveDefault] || "Selecciona almacenamiento válido"} €`;
+
+    popupImg.src =
+        "img/" + modeloValue.toLowerCase().replace(/\s+/g, "") + ".png";
 
     overlay.style.display = 'flex';
 }
