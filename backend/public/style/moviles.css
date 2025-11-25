@@ -225,6 +225,32 @@
         font-weight: bold;
     }
 
+    .almacenamiento-tabs {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .almacenamiento-tab {
+        padding: 6px 12px;
+        background: #eaeaea;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .almacenamiento-tab:hover {
+        background: #d0d0d0;
+    }
+
+    .almacenamiento-tab.active {
+        background: #006adb;
+        color: white;
+    }
+
+
     /* MEDIA QUERIES */
     @media (max-width: 1024px) {
         .main-content h1 { font-size: 8vw; }
