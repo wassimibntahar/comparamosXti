@@ -9,8 +9,9 @@
 </head>
 <body>
     <header>
-        <div class="logo">comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</div>
-
+        <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">
+            comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti
+        </a>
         <form class="busqueda">
             <input type="text" placeholder="Buscar artículo...">
             <img src="img/lupa.png" alt="Buscar" class="lupa-icon">
@@ -19,7 +20,7 @@
         <nav>
         <a href="index.html">Inicio</a>
         <a href="sobre_nosotros.html">Sobre nosotros</a>
-        <a href="#">Contacto</a>
+        <a href="contacto.html">Contacto</a>
         </nav>
     </header>
 
@@ -89,7 +90,8 @@
         <div class="popup">
             <button id="cerrarPopup" class="cerrar-popup">✖</button>
             <img id="popupImagen" alt="Imagen del producto" style="max-width: 300px; margin-bottom: 20px;">
-            <p id="popupContenido">Aquí aparecerá el contenido...</p>
+            <div id="popupAlmacenamientos" class="almacenamiento-tabs"></div>
+            <p id="popupContenido" style="font-weight: bold; color: black;">Aquí aparecerá el contenido...</p>
             <p id="popupPrecio" style="padding: 3px; font-weight: bold; font-size: 40px; color: black;">
         </div>
     </div>
