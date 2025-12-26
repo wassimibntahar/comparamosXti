@@ -1,3 +1,30 @@
+function obtenerFavoritos() {
+    return JSON.parse(localStorage.getItem("favoritos")) || [];
+}
+
+function guardarFavoritos(favs) {
+    localStorage.setItem("favoritos", JSON.stringify(favs));
+}
+
+function esFavorito(id) {
+    return obtenerFavoritos().includes(id);
+}
+
+function toggleFavorito(idProducto, favImg) {
+    let favoritos = obtenerFavoritos();
+
+    if (favoritos.includes(idProducto)) {
+        favoritos = favoritos.filter(f => f !== idProducto);
+        favImg.src = "img/fav_vacio.png";
+    } else {
+        favoritos.push(idProducto);
+        favImg.src = "img/fav_lleno.png";
+    }
+
+    guardarFavoritos(favoritos);
+}
+
+
 let precios = {}; // objeto plano para popup
 
 // Toggle filtros
@@ -24,18 +51,79 @@ function setupSeleccionador(grupoId) {
 }
 
 // Mostrar popup
-function mostrarPopup(modelo, almacenamiento, precios) {
+function mostrarPopup(modelo, almacenamientoDefault, precios) {
     const overlay = document.getElementById('overlay');
     const popupContenido = document.getElementById('popupContenido');
+    const popupPrecio = document.getElementById("popupPrecio");
+    const popupImg = document.getElementById("popupImagen");
+    const tabsContainer = document.getElementById("popupAlmacenamientos");
 
-    const clave = `${modelo.dataset.value}-${almacenamiento.dataset.value.trim()}`;
-    const precio = precios[clave] ? precios[clave] + " €" : "Precio no disponible";
+    const modeloValue = modelo.dataset.value.trim();
 
-    popupContenido.innerText = `Modelo: ${modelo.dataset.value.trim()}\nAlmacenamiento: ${almacenamiento.dataset.value.trim()}`;
-    document.getElementById("popupPrecio").innerText = `Precio: ${precio}`;
+    const favBtn = document.getElementById("favBtn");
+    const favImg = favBtn.querySelector("img");
 
-    const nombreArchivo = "img/" + modelo.dataset.value.toLowerCase().replace(/\s+/g, '') + ".png";
-    document.getElementById("popupImagen").src = nombreArchivo;
+    let almacenamientoActual = almacenamientoDefault.dataset.value.trim();
+
+    function actualizarFav() {
+        const idProducto = `${modeloValue}-${almacenamientoActual}`;
+
+        favImg.src = esFavorito(idProducto)
+            ? "img/fav_lleno.png"
+            : "img/fav_vacio.png";
+
+        favBtn.onclick = () => toggleFavorito(idProducto, favImg);
+    }
+
+    // Obtener TODOS los almacenamientos disponibles para ese modelo
+    const almacenamientos = [...new Set(
+        Object.keys(precios)
+            .filter(k => k.startsWith(modeloValue))
+            .map(k => k.split("-")[1])
+    )];
+
+    // Crear pestañas de almacenamiento
+    tabsContainer.innerHTML = "";
+    almacenamientos.forEach(a => {
+        const tab = document.createElement("div");
+        tab.className = "almacenamiento-tab";
+        tab.innerText = a;
+
+        if (a === almacenamientoDefault.dataset.value.trim()) {
+            tab.classList.add("active");
+        }
+
+        // Evento: cambiar almacenamiento
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".almacenamiento-tab")
+                .forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            almacenamientoActual = a;          // 🔥 CLAVE
+            actualizarFav();                   // 🔥 CLAVE
+
+            const clave = `${modeloValue}-${a}`;
+            popupPrecio.innerText =
+                "Precio: " + (precios[clave] ? precios[clave] + " €" : "Selecciona almacenamiento válido");
+        });
+
+
+        tabsContainer.appendChild(tab);
+    });
+
+    popupContenido.innerText =
+        `Modelo: ${modeloValue}`;
+
+    const claveDefault =
+        `${modeloValue}-${almacenamientoDefault.dataset.value.trim()}`;
+
+    popupPrecio.innerText =
+        `Precio: ${precios[claveDefault] || "Selecciona almacenamiento válido"} €`;
+
+    popupImg.src =
+        "img/" + modeloValue.toLowerCase().replace(/\s+/g, "") + ".png";
+
+    actualizarFav();
 
     overlay.style.display = 'flex';
 }
@@ -68,6 +156,7 @@ document.getElementById("buscarSamsung").addEventListener("click", () => {
     if (!modelo || !almacenamiento) return alert("Selecciona un modelo y almacenamiento de Samsung");
     mostrarPopup(modelo, almacenamiento, precios);
 });
+
 
 fetch('../db.json')
     .then(res => res.json())
@@ -111,8 +200,36 @@ fetch('../db.json')
         setupSeleccionador("almacenamientoOpcionesIphone");
     });
 
+    // Leer query param
+    const params = new URLSearchParams(window.location.search);
+    const modeloBuscado = params.get("modelo");
+
+    if (modeloBuscado) {
+        setTimeout(() => {
+            // Seleccionar modelo automáticamente
+            const modeloDiv = [...document.querySelectorAll("#modeloOpcionesIphone .selector-opcion, #modeloOpcionesSamsung .selector-opcion")]
+                            .find(el => el.dataset.value === modeloBuscado);
+
+            if (modeloDiv) {
+                modeloDiv.click();
+
+                // seleccionar almacenamiento base automáticamente
+                const almacenDiv = modeloDiv.parentElement.id.includes("Iphone") ?
+                    document.querySelector("#almacenamientoOpcionesIphone .selector-opcion") :
+                    document.querySelector("#almacenamientoOpcionesSamsung .selector-opcion");
+
+                if (almacenDiv) almacenDiv.click();
+
+                // abrir popup
+                mostrarPopup(modeloDiv, almacenDiv, precios);
+            }
+        }, 400);
+    }
+
+
 
 // Toggle filtros
 toggleFiltros("iphoneTitulo", "iphoneFiltros");
 toggleFiltros("samsungTitulo", "samsungFiltros");
 toggleFiltros("xiaomiTitulo", "xiaomiFiltros");
+toggleFiltros("huaweiTitulo", "huaweiFiltros");

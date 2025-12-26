@@ -9,8 +9,9 @@
 </head>
 <body>
     <header>
-        <div class="logo">comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</div>
-
+        <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">
+            comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti
+        </a>
         <form class="busqueda">
             <input type="text" placeholder="Buscar artículo...">
             <img src="img/lupa.png" alt="Buscar" class="lupa-icon">
@@ -19,7 +20,8 @@
         <nav>
         <a href="index.html">Inicio</a>
         <a href="sobre_nosotros.html">Sobre Nosotros</a>
-        <a href="#">Contacto</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="favoritos.html">Favoritos</a>
         </nav>
     </header>
 
@@ -65,23 +67,38 @@
             <button id="buscarNintendo" class="btn-buscar">Buscar</button>
 
         </div>
-        <h4>Xbox</h4>
-        <h5>Cracolandia</h5>
+        <h4 id="xboxTitulo" class="clickable">Xbox</h4>
+        <div id="xboxFiltros" class="filtros" style="display: none;">
+            <h6>Modelo:</h6>
+            <div class="selector-group" id="modeloOpcionesXbox">
+            <div class="selector-opcion" data-value="Xbox">Xbox</div>
+
+        </div>
+
+            <h6>Almacenamiento:</h6>
+            <div class="selector-group" id="almacenamientoOpcionesXbox">
+            <div class="selector-opcion" data-value="500 GB">500 GB</div>
+            <div class="selector-opcion" data-value="850 GB">850 GB</div>
+            </div>
+
+            <button id="buscarXbox" class="btn-buscar">Buscar</button>
+
+        </div>
     </main>
 
     <div id="overlay" style="display:none;">
         <div class="popup">
+            <button id="favBtn" class="fav-btn" aria-label="Marcar favorito"><img src="img/fav_vacio.png" alt="Favorito"></button>
             <button id="cerrarPopup" class="cerrar-popup">✖</button>
             <img id="popupImagen" alt="Imagen del producto">
-            <p id="popupContenido">Aquí aparecerá el contenido...</p>
+            <div id="popupAlmacenamientos" class="almacenamiento-tabs"></div>
+            <p id="popupContenido" style="font-weight: bold; color: black;">Aquí aparecerá el contenido...</p>
             <p id="popupPrecio" style="padding: 0; font-weight: bold; font-size: 40px; color: black;"></p>
         </div>
     </div>
 
-    <div class="rtalalero" style="padding-left: 20%">
-        <img src="img/tralalero.png" alt="tralalero">
-    </div>
-
   <script src="js/consolas.js"></script>
+  <script src="js/busqueda.js"></script>
+
 </body>
 </html>

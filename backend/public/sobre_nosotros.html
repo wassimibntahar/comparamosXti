@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros - ComparamosXti</title>
     <link rel="stylesheet" href="style/sobre_nosotros.css">
-
 </head>
+
 <body>
 
     <header>
-        <div class="logo">comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti</div>
+        <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">
+            comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti
+        </a>
 
         <form class="busqueda">
             <input type="text" placeholder="Buscar artículo...">
@@ -20,36 +22,82 @@
         <nav>
             <a href="index.html">Inicio</a>
             <a href="sobre_nosotros.html">Sobre Nosotros</a>
-            <a href="#">Contacto</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="favoritos.html">Favoritos</a>
         </nav>
     </header>
 
-    <main>
-        <h2 class="pregunta-logo" style="color:black">¿Qué es comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti?</h2>
 
-        <div class="section">
-            <div class="text">
-                <h2>Nuestra Misión</h2>
-                <p>En ComparamosXti ofrecemos información precisa y actualizada sobre precios de tecnología de segunda mano. Procuramos que cada usuario pueda tomar decisiones informadas y encontrar las mejores ofertas de manera rápida y confiable.</p>
-            </div>
-        </div>
+    <!-- =======================
+            SOBRE NOSOTROS
+         ======================= -->
 
-        <div class="section">
-            <div class="text">
-                <h2>Nuestra Visión</h2>
-                <p>Ser la plataforma de referencia en comparación de productos electrónicos, ofreciendo transparencia, rapidez y confiabilidad.</p>
-            </div>
-        </div>
+    <main class="about-container">
 
-        <div class="team">
-            <h2>Desarrollador y Fundador</h2>
-            <div class="member">
-            <div class="member-info">
-                <h3>Wassim Ibn Tahar</h3>
-                <img src="img/Wassim.jpg" alt="Wassim Ibn Tahar">
-            </div>
-        </div>
+        <section class="about-block">
+            <h2>¿Qué es comparamos<span class="logoX" style="color:rgb(0, 118, 244)">X</span>ti?</h2>
+            <p>
+                ComparamosXti nace para resolver un problema muy sencillo: <strong>es difícil saber el precio REAL</strong>
+                de un móvil o una consola de segunda mano. Cada plataforma muestra un precio distinto, muchos vendedores
+                inflan el precio, y al final el usuario pierde tiempo comparando.
+            </p>
+
+            <p>
+                Nuestro propósito es ofrecer en <strong>segundos</strong> una estimación realista, clara y basada en datos.
+                No vendemos nada, solo te ayudamos a que pagues (o cobres) lo que realmente toca.
+            </p>
+        </section>
+
+
+        <section class="about-block">
+            <h2>Nuestra Misión</h2>
+            <p>
+                Hacer que comprar y vender tecnología usada sea <strong>fácil, justo y rápido</strong>.
+            </p>
+            <p>
+                Queremos que cualquier usuario, tenga conocimientos técnicos o no, pueda consultar precios fiables
+                sin complicaciones. Nuestro sistema recoge modelos, variantes y capacidades de almacenamiento para mostrar
+                el valor real del dispositivo.
+            </p>
+        </section>
+
+
+        <section class="about-block">
+            <h2>Nuestra Visión</h2>
+            <p>
+                Aspiramos a convertirnos en la plataforma de referencia en comparación de precios tecnológicos, ampliando
+                constantemente nuestras categorías e incorporando herramientas más avanzadas como:
+            </p>
+
+            <ul>
+                <li> Seguimiento de precios y fluctuaciones</li>
+                <li> Alertas automáticas personalizadas</li>
+                <li> Comparaciones instantáneas entre modelos</li>
+                <li> Datos más precisos del mercado real</li>
+            </ul>
+
+            <p>
+                El objetivo: que cualquier persona pueda tomar decisiones informadas con la máxima transparencia.
+            </p>
+        </section>
+
+
+        <section class="about-block">
+            <h2>Quién está detrás</h2>
+            <p>
+                Mi nombre es <strong>Wassim Ibn Tahar</strong>, estudiante de Ingeniería Informática y apasionado de la tecnología.
+                ComparamosXti comenzó como un proyecto personal, con la meta de resolver un problema real que yo mismo tenía.
+            </p>
+
+            <p>
+                Hoy es una herramienta viva, en constante evolución, pensada para ayudar a miles de personas a ahorrar
+                tiempo, dinero y dolores de cabeza.
+            </p>
+        </section>
 
     </main>
+
+    <script src="js/busqueda.js"></script>
+
 </body>
 </html>

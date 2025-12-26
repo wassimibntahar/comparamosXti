@@ -41,13 +41,13 @@
     .busqueda input {
         width: 100%;
         font-size: 1rem;
-        padding: 0.5rem 0rem 0.5rem 1rem;
+        padding: 0.5rem 1.5rem 0.5rem 1rem;
         border-radius: 1rem;
     }
 
     .lupa-icon {
         position: absolute;
-        right: 0rem;
+        right: -1.6rem;
         top: 50%;
         transform: translateY(-50%);
         width: 1.25rem;
@@ -57,6 +57,11 @@
         transition: 0.2s ease;
     }
 
+    nav {
+        display: flex;
+        font-size: 0.15rem;
+        margin-right: 4.4rem;
+    }
     nav a {
         text-decoration: none;
         color: #333;
@@ -164,7 +169,7 @@
 
     .popup {
         background: white;
-        padding: 2rem;
+        padding: 3.5rem 2rem 2rem; /* 🔑 más padding arriba */
         border-radius: 1.25rem;
         box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
         max-width: 100%;
@@ -175,20 +180,18 @@
         position: relative;
     }
 
-    #popupImagen {
-        height: 330px;       /* altura base en pantallas grandes */
-        max-height: 50vh;    /* no más de la mitad de la pantalla */
-        width: auto;         /* ancho proporcional */
-        margin-bottom: 50px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+    .popup img {
+        max-width: 80%;
+        height: auto;
+        margin-bottom: 1rem;
+        margin-top: 1.3rem;
     }
 
     .cerrar-popup {
         position: absolute;
-        top: 0.4rem;
+        top: 0.8rem;
         right: 1rem;
+        z-index: 30;
         background: transparent;
         border: none;
         font-size: 1.75rem;
@@ -226,6 +229,31 @@
     .selector-opcion.selected {
         background-color: #cce3ff;
         font-weight: bold;
+    }
+
+    .almacenamiento-tabs {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .almacenamiento-tab {
+        padding: 6px 12px;
+        background: #eaeaea;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .almacenamiento-tab:hover {
+        background: #d0d0d0;
+    }
+
+    .almacenamiento-tab.active {
+        background: #006adb;
+        color: white;
     }
 
 
@@ -297,4 +325,149 @@
         main h3 { animation-delay: 0.15s; }
         main h4 { animation-delay: 0.2s; }
         main h5 { animation-delay: 0.25s }
+
+    /* ========== FONDO DE ONDAS MULTICOLOR SUPER LIGERAS ========== */
+    body::before {
+        content: "";
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 45vh; /* altura de la zona con ondas */
+        pointer-events: none;
+        z-index: -1;
+
+        background:
+            radial-gradient(ellipse at 20% 80%, rgba(0,118,244,0.18), transparent 70%),
+            radial-gradient(ellipse at 50% 90%, rgba(255,80,80,0.15), transparent 70%),
+            radial-gradient(ellipse at 80% 85%, rgba(255,220,0,0.18), transparent 70%);
+
+        filter: blur(40px);
+        animation: ondasMover 14s ease-in-out infinite alternate;
+    }
+
+    /* ========== ANIMACIÓN SUAVE DE DESPLAZAMIENTO ========== */
+    @keyframes ondasMover {
+        0%   { transform: translateY(0px) translateX(0px); opacity: 0.95; }
+        50%  { transform: translateY(-12px) translateX(10px); opacity: 1; }
+        100% { transform: translateY(0px) translateX(-10px); opacity: 0.95; }
+    }
+
+
+
+    /* ===========================
+    📱 RESPONSIVE SEGURO (solo móvil)
+    =========================== */
+    @media (max-width: 768px) {
+
+        /* Contenedor general */
+        body {
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        /* 🟦 Header: evitar que todo se apelmace */
+        header {
+            flex-wrap: wrap;
+            gap: 10px;
+            text-align: center;
+        }
+
+        header nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header .busqueda {
+            width: 100%;
+            order: 3; /* Va debajo del logo y menú */
+        }
+
+        header .busqueda input {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* 🖼️ Hacer imágenes escalables */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Evita que las secciones sean demasiado anchas */
+        .main-content, .about-container, .contact-wrapper {
+            padding: 10px;
+            width: 100%;
+        }
+
+        /* H1/H2 más pequeños en móvil */
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 22px;
+        }
+
+        /* Filtros móviles → que no se salgan del ancho */
+        .filtros {
+            width: 100%;
+        }
+
+        .selector-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .selector-opcion {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        /* Popup adaptado */
+        #overlay .popup {
+            width: 90%;
+            max-width: 340px;
+        }
+
+        #popupPrecio {
+            font-size: 28px !important;
+        }
+    }
+
+    .fav-btn {
+        position: absolute;      /* 🔑 CLAVE */
+        top: -0.3rem;             /* distancia desde arriba */
+        left: 0.4rem;            /* distancia desde la izquierda */
+
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        z-index: 20;             /* por encima de la imagen */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .fav-btn img {
+        width: 43px;
+        height: 33px;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    /* hover */
+    .fav-btn:hover img {
+        transform: scale(1.1);
+    }
+
+    /* click */
+    .fav-btn:active img {
+        transform: scale(0.95);
+    }
+
+
 </style>

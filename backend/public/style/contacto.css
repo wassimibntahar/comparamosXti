@@ -1,0 +1,275 @@
+/* =======================
+   GLOBAL
+======================= */
+
+body {
+    background: #ffffff;  /* FONDO BLANCO – COMO PEDISTE */
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+}
+
+/* Wrapper general: caja blanca centrada con sombra suave */
+.contact-wrapper {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+/* =======================
+   LEFT SIDE (FORM)
+======================= */
+
+.contact-left {
+    flex: 2;
+}
+
+.contact-left h2 {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+    color: #111;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Inputs modernos */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: rgb(0,118,244);
+    outline: none;
+    background: #fff;
+}
+
+.contact-form textarea {
+    height: 160px;
+    resize: none;
+}
+
+/* Fake captcha estilizado */
+.fake-captcha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f2f2f2;
+    padding: 12px 15px;
+    border-radius: 10px;
+    color: #555;
+    border: 1px solid #ddd;
+    width: fit-content;
+}
+
+.fake-captcha input {
+    transform: scale(1.2);
+}
+
+/* Botón SEND bonito */
+.send-btn {
+    background: rgb(0, 118, 244);
+    border: none;
+    padding: 14px;
+    width: 130px;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.send-btn:hover {
+    background: rgb(0, 64, 132)
+}
+
+
+/* =======================
+   RIGHT SIDE (INFO)
+======================= */
+
+.contact-right {
+    flex: 1;
+    padding-top: 10px;
+}
+
+.contact-right h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.right-text {
+    margin: 5px 0;
+    color: #444;
+}
+
+/* Redes sociales */
+.socials {
+    margin-top: 25px;
+    display: flex;
+    gap: 18px;
+}
+
+.socials a {
+    color: rgb(0, 118, 244);
+    font-size: 26px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.socials a:hover {
+    color: rgb(0,118,244);
+}
+
+
+/* =======================
+   RESPONSIVE
+======================= */
+
+@media (max-width: 900px) {
+    .contact-wrapper {
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    .contact-right {
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .socials {
+        justify-content: center;
+    }
+}
+
+    /* ===========================================================
+    📱 RESPONSIVE — IGUAL QUE TU MOVILES.CSS ORIGINAL (sin duplicados)
+    =========================================================== */
+
+    @media (max-width: 1024px) {
+        .main-content h1 { font-size: 8vw; }
+        .main-content h2, .main-content h3, .main-content h4, .main-content h5 { font-size: 5vw; }
+        .popup { width: 80%; font-size: 1rem; }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Header */
+        header {
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 1rem 2rem;
+            gap: 10px;
+            text-align: center;
+        }
+
+        header nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .busqueda {
+            margin: 1rem 0;
+            width: 100%;
+            order: 3;
+        }
+
+        .busqueda input {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* Titulos */
+        .main-content {
+            padding-top: 11rem;
+        }
+
+        .main-content h1 { font-size: 10vw; text-align: center; }
+        .main-content h2, .main-content h3, .main-content h4, .main-content h5 {
+            font-size: 6vw;
+            text-align: center;
+        }
+
+        /* Botón */
+        .btn-buscar {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        /* Pop-up */
+        .popup {
+            width: 90%;
+            padding: 1rem;
+            font-size: 1rem;
+            height: auto;
+        }
+
+        #popupImagen {
+            height: 25vh;
+            max-height: 200px;
+            margin-bottom: 15px;
+            width: auto;
+        }
+
+        #popupPrecio {
+            font-size: 30px;
+        }
+
+        /* Filtros */
+        .filtros { width: 100%; }
+
+        .selector-group {
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .selector-opcion {
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+
+        /* H1/H2 genérico */
+        h1 { font-size: 28px; }
+        h2 { font-size: 22px; }
+    }
+
+    @media (max-width: 480px) {
+
+        #popupImagen {
+            height: 20vh;
+            max-height: 150px;
+        }
+
+        #popupPrecio {
+            font-size: 24px;
+        }
+    }

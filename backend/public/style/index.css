@@ -17,7 +17,7 @@
         width: 100%;
         background-color: #fff;
         z-index: 1000;
-        padding: 1rem 2rem;
+        padding: 0.8rem 2rem;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -41,13 +41,13 @@
     .busqueda input {
         width: 100%;
         font-size: 1rem;
-        padding: 0.5rem 0rem 0.5rem 1rem;
+        padding: 0.5rem 1.5rem 0.5rem 1rem;
         border-radius: 1rem;
     }
 
     .lupa-icon {
         position: absolute;
-        right: 0rem;
+        right: -1.6rem;
         top: 50%;
         transform: translateY(-50%);
         width: 1.25rem;
@@ -57,6 +57,11 @@
         transition: 0.2s ease;
     }
 
+    nav {
+        display: flex;
+        font-size: 0.15rem;
+        margin-right: 4.4rem;
+    }
     nav a {
         text-decoration: none;
         color: #333;
@@ -83,7 +88,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding-top: 7rem;
+        padding-top: 6rem;
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -171,4 +176,140 @@
         .filtro-popup { grid-template-columns: 1fr; width: 90%; }
     }
 
+    /* ========== FONDO DE ONDAS MULTICOLOR SUPER LIGERAS ========== */
+    body::before {
+        content: "";
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 45vh; /* altura de la zona con ondas */
+        pointer-events: none;
+        z-index: -1;
+
+        background:
+            radial-gradient(ellipse at 20% 80%, rgba(0,118,244,0.18), transparent 70%),
+            radial-gradient(ellipse at 50% 90%, rgba(255,80,80,0.15), transparent 70%),
+            radial-gradient(ellipse at 80% 85%, rgba(255,220,0,0.18), transparent 70%);
+
+        filter: blur(40px);
+        animation: ondasMover 14s ease-in-out infinite alternate;
+    }
+
+    /* ========== ANIMACIÓN SUAVE DE DESPLAZAMIENTO ========== */
+    @keyframes ondasMover {
+        0%   { transform: translateY(0px) translateX(0px); opacity: 0.95; }
+        50%  { transform: translateY(-12px) translateX(10px); opacity: 1; }
+        100% { transform: translateY(0px) translateX(-10px); opacity: 0.95; }
+    }
+
+
+
+    /* ===========================================================
+    📱 RESPONSIVE — IGUAL QUE TU MOVILES.CSS ORIGINAL (sin duplicados)
+    =========================================================== */
+
+    @media (max-width: 1024px) {
+        .main-content h1 { font-size: 8vw; }
+        .main-content h2, .main-content h3, .main-content h4, .main-content h5 { font-size: 5vw; }
+        .popup { width: 80%; font-size: 1rem; }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Header */
+        header {
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 1rem 2rem;
+            gap: 10px;
+            text-align: center;
+        }
+
+        header nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .busqueda {
+            margin: 1rem 0;
+            width: 100%;
+            order: 3;
+        }
+
+        .busqueda input {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* Titulos */
+        .main-content {
+            padding-top: 11rem;
+        }
+
+        .main-content h1 { font-size: 10vw; text-align: center; }
+        .main-content h2, .main-content h3, .main-content h4, .main-content h5 {
+            font-size: 6vw;
+            text-align: center;
+        }
+
+        /* Botón */
+        .btn-buscar {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        /* Pop-up */
+        .popup {
+            width: 90%;
+            padding: 1rem;
+            font-size: 1rem;
+            height: auto;
+        }
+
+        #popupImagen {
+            height: 25vh;
+            max-height: 200px;
+            margin-bottom: 15px;
+            width: auto;
+        }
+
+        #popupPrecio {
+            font-size: 30px;
+        }
+
+        /* Filtros */
+        .filtros { width: 100%; }
+
+        .selector-group {
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .selector-opcion {
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+
+        /* H1/H2 genérico */
+        h1 { font-size: 28px; }
+        h2 { font-size: 22px; }
+    }
+
+    @media (max-width: 480px) {
+
+        #popupImagen {
+            height: 20vh;
+            max-height: 150px;
+        }
+
+        #popupPrecio {
+            font-size: 24px;
+        }
+    }
+
+    
 </style>

@@ -17,7 +17,7 @@
         width: 100%;
         background-color: #fff;
         z-index: 1000;
-        padding: 1rem 2rem;
+        padding: 0.8rem 2rem;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -70,6 +70,12 @@
         margin-left: 1.4rem;
     }
 
+    .logo {
+        font-weight: bold;
+        font-size: 1.875rem;
+        color: #333;
+    }
+
     /* Main Content */
     .main-content {
         display: flex;
@@ -84,7 +90,7 @@
     }
 
     .main-content h2, .main-content h3, .main-content h4, .main-content h5 {
-        font-size: 2.5vw;
+        font-size: 1.5vw;
         margin-bottom: 0.1rem;
     }
 
@@ -93,6 +99,52 @@
         font-weight: 600;
         margin-bottom: 0.5rem;
         margin-top: 1.8rem;
+    }
+
+    .favoritos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    /* Tarjetas */
+    .favorito-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 15px;
+        text-align: center;
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .favorito-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .favorito-card img {
+        width: 100%;
+        max-width: 220px;   /* ⬅️ límite horizontal */
+        height: auto;       /* mantiene proporción */
+        max-height: 180px;  /* ⬅️ límite vertical */
+        object-fit: contain; /* no recorta la imagen */
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .favorito-card h3 {
+        font-size: 1rem;
+        margin: 8px 0;
+    }
+
+    .favorito-card p {
+        font-size: 0.95rem;
+        color: #444;
     }
 
     /* Clickable */
@@ -163,7 +215,7 @@
 
     .popup {
         background: white;
-        padding: 3.5rem 2rem 2rem; /* 🔑 más padding arriba */
+        padding: 2rem;
         border-radius: 1.25rem;
         box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
         max-width: 100%;
@@ -178,14 +230,13 @@
         max-width: 80%;
         height: auto;
         margin-bottom: 1rem;
-        margin-top: 1.3rem;
+        margin-top: 3rem;
     }
 
     .cerrar-popup {
         position: absolute;
-        top: 0.8rem;
+        top: 0.4rem;
         right: 1rem;
-        z-index: 30;
         background: transparent;
         border: none;
         font-size: 1.75rem;
@@ -454,38 +505,18 @@
         }
     }
 
-    .fav-btn {
-        position: absolute;      /* 🔑 CLAVE */
-        top: -0.3rem;             /* distancia desde arriba */
-        left: 0.4rem;            /* distancia desde la izquierda */
-
-        background: none;
-        border: none;
-        cursor: pointer;
-
-        z-index: 20;             /* por encima de la imagen */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .quitar-fav {
+    background: none;
+    border: none;
+    color: rgb(220, 0, 0);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
     }
 
-
-    .fav-btn img {
-        width: 43px;
-        height: 33px;
-        transition: transform 0.15s ease, opacity 0.15s ease;
+    .quitar-fav:hover {
+        text-decoration: underline;
     }
-
-    /* hover */
-    .fav-btn:hover img {
-        transform: scale(1.1);
-    }
-
-    /* click */
-    .fav-btn:active img {
-        transform: scale(0.95);
-    }
-
 
   
 </style>

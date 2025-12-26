@@ -80,10 +80,11 @@
     { "id": 71, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5 Slim (Con Lector)", "almacenamiento": "500 GB", "precio": 350 },
     { "id": 72, "categoria": "consolas", "marca": "Sony", "modelo": "PlayStation 5 Slim (Con Lector)", "almacenamiento": "850 GB", "precio": 380 },
 
-    { "id": 73, "categoria": "consolas", "marca": "Nintendo", "modelo": "Nintendo Switch 2", "almacenamiento": "256 GB", "precio": 415 },
+    { "id": 73, "categoria": "consolas", "marca": "Nintendo", "modelo": "Nintendo Switch", "almacenamiento": "32 GB", "precio": 140 },
     { "id": 74, "categoria": "consolas", "marca": "Nintendo", "modelo": "Nintendo Switch Oled", "almacenamiento": "64 GB", "precio": 190 },
-    { "id": 75, "categoria": "consolas", "marca": "Nintendo", "modelo": "Nintendo Switch", "almacenamiento": "32 GB", "precio": 140 }
-
+    { "id": 75, "categoria": "consolas", "marca": "Nintendo", "modelo": "Nintendo Switch 2", "almacenamiento": "256 GB", "precio": 415 },
+    
+    { "id": 76, "categoria": "consolas", "marca": "Xbox", "modelo": "Xbox Series X", "almacenamiento": "850 GB", "precio": 420 }
 
   ]
 }
